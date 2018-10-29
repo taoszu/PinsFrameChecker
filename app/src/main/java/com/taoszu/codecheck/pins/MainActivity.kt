@@ -2,7 +2,6 @@ package com.taoszu.codecheck.pins
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.taoszu.codecheck.pins.shop.R
 
 class MainActivity : AppCompatActivity() {
 

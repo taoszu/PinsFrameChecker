@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-apply plugin: 'pins-code-checker'
+//apply plugin: 'pins-code-checker'
 
 android {
     compileSdkVersion 28
@@ -22,10 +22,10 @@ android {
     }
 
     sourceSets {
-        def pDirs = ['p_shop', 'main']
         main {
-            manifest.srcFile("src/main/AndroidManifest.xml")
-            
+            def pDirs = ['p_shop', 'main', "p_pay"]
+            manifest.srcFile "src/main/AndroidManifest.xml"
+
             pDirs.each { dir ->
                 java.srcDir("src/$dir/java")
                 res.srcDir("src/$dir/res")
