@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <pins_src name = "pins_src_package">
+        <name>com/taoszu/codecheck/pins/p_shop</name>
+    </pins_src>
+
+    <pins_depend name="pins_depend_package">
+        <name>com/taoszu/codecheck/pins/p_pay</name>
+    </pins_depend>
+
+
+</resources>

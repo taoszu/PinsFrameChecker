@@ -32,26 +32,26 @@ class CodeTransform extends Transform {
         return false
     }
 
-
     @Override
     void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
         super.transform(transformInvocation)
 
         ScannerDetector.project = project
 
-           transformInvocation.inputs.each { TransformInput input ->
-                   if (!input.directoryInputs.empty) {
-                       input.directoryInputs.each { DirectoryInput directoryInput  ->
-                           directoryInput.file.eachFileRecurse { File file ->
-                               if (file.isFile() && ScannerDetector.shouldScan(file)) {
-                                   ScannerDetector.scanClass(file)
-                               }
-                           }
-                       }
-                   }
-           }
+        transformInvocation.inputs.each { TransformInput input ->
+            if (!input.directoryInputs.empty) {
+                input.directoryInputs.each { DirectoryInput directoryInput  ->
+                    directoryInput.file.eachFileRecurse { File file ->
+                        if (file.isFile() && ScannerDetector.shouldScan(file)) {
+                            ScannerDetector.scanClass(file)
+                        }
+                    }
+                }
+            }
+        }
 
     }
+
 
 
 }
