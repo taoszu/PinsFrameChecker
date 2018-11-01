@@ -8,6 +8,11 @@ class FileTool {
         return project.projectDir.path + File.separator + "src"
     }
 
+    static File getJavaDir(File dir) {
+        return new File(dir ,"/java")
+    }
+
+
     static File getPinsPropertiesFile(File pinsModuleDir) {
         return new File(pinsModuleDir, "pins.properties")
     }

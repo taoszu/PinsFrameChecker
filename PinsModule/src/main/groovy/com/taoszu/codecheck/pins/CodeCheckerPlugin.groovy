@@ -1,6 +1,7 @@
 package com.taoszu.codecheck.pins
 
 import com.android.build.gradle.AppPlugin
+import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.LibraryPlugin
 import com.android.build.gradle.TestPlugin
 import com.taoszu.codecheck.pins.extension.PinsModuleExtension
@@ -13,6 +14,8 @@ class CodeCheckerPlugin implements Plugin<Project> {
 
     PinsModuleExtension pinsModuleExtension
     PinsModuleWareHouse pinsModuleWareHouse
+    PinsModuleDetector pinsModuleDetector
+    BaseExtension androidExtension
 
     @Override
     void apply(Project project) {
@@ -26,8 +29,10 @@ class CodeCheckerPlugin implements Plugin<Project> {
             throw new GradleException("require android plugin")
         }
 
-        pinsModuleWareHouse = new PinsModuleWareHouse()
+        androidExtension = (BaseExtension) project.extensions.getByName("android")
 
+        pinsModuleDetector = new PinsModuleDetector()
+        pinsModuleWareHouse = new PinsModuleWareHouse()
         pinsModuleExtension = project.extensions.create(PinsModuleExtensionInterface, "pinsModule", PinsModuleExtension, project)
         pinsModuleExtension.onPinsModuleListener = new PinsModuleExtension.OnPinsModuleListener() {
             @Override
@@ -39,10 +44,12 @@ class CodeCheckerPlugin implements Plugin<Project> {
 
         project.afterEvaluate {
             pinsModuleWareHouse.includePinsModuleMap.values().forEach {
-                pinsModuleWareHouse.readPinsProperties(it)
+                pinsModuleWareHouse.checkPinsProperties(it)
+
+                pinsModuleDetector.checkFile(project, it)
             }
 
-            project.logger.error(pinsModuleWareHouse.dependencyPinsModuleMap.toString())
+
         }
     }
 

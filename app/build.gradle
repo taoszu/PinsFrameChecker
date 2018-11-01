@@ -23,7 +23,7 @@ android {
 
     sourceSets {
         main {
-            def pDirs = ['p_shop', 'main', "p_pay"]
+            def pDirs = ['main', 'p_shop', "p_pay"]
             manifest.srcFile "src/main/AndroidManifest.xml"
 
             pDirs.each { dir ->

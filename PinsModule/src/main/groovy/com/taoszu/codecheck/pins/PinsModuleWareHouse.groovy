@@ -29,7 +29,11 @@ class PinsModuleWareHouse {
         return includePinsModuleMap.get(CommonTool.formatModuleName(moduleName))
     }
 
-    void readPinsProperties(PinsModuleEntity pinsModule) {
+    /**
+     * 检查pins配置
+     * @param pinsModule
+     */
+    void checkPinsProperties(PinsModuleEntity pinsModule) {
         File pinsPropertiesFile = FileTool.getPinsPropertiesFile(pinsModule.pinsModuleDir)
         if (!pinsPropertiesFile.exists()) {
             return
