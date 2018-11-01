@@ -24,8 +24,6 @@ class CodeCheckerPlugin implements Plugin<Project> {
         {
             throw new GradleException("require android plugin")
         }
-        //PinsConfigReader.read(project, "")
-
 
         pinsModuleExtension = project.extensions.create(PinsModuleExtension, "pinsModule", BasePinsModuleExtension, project)
         pinsModuleExtension.onPinsModuleListener = new BasePinsModuleExtension.OnPinsModuleListener() {
