@@ -1,4 +1,4 @@
-package com.taoszu.codecheck.pins
+package com.taoszu.codecheck.pins.entity
 
 
 class PinsModuleEntity {

@@ -1,20 +1,18 @@
 package com.taoszu.codecheck.pins
 
+import com.taoszu.codecheck.pins.entity.PinsModuleFileEntity
+import com.taoszu.codecheck.pins.entity.PinsModuleEntity
 import com.taoszu.codecheck.pins.tool.CommonTool
 import com.taoszu.codecheck.pins.tool.FileTool
 import org.gradle.api.GradleException
 
 class PinsModuleWareHouse {
 
-    /**
-     * 格式为 p_pay : .../src/p_pay
-     */
     Map<String, PinsModuleEntity> includePinsModuleMap = new HashMap<>()
 
-    /**
-     * 格式为 p_pay : [p_pay, p_shop]
-     */
     Map<String, Set<String>> dependencyPinsModuleMap = new HashMap<>()
+
+    PinsModuleFileEntity pinsModuleFileEntity = new PinsModuleFileEntity()
 
 
     PinsModuleWareHouse() {
@@ -52,21 +50,24 @@ class PinsModuleWareHouse {
         }
     }
 
-    private void genPinsDependency(PinsModuleEntity currentPinsModule, String pinsModuleName) {
-        PinsModuleEntity dependPinsModule = getPinsModule(pinsModuleName)
+    private void genPinsDependency(PinsModuleEntity currentPinsModule, String dependencyModuleName) {
+        PinsModuleEntity dependPinsModule = getPinsModule(dependencyModuleName)
         if (dependPinsModule == null) {
-            throw new GradleException("can not find specified pinsModule '${pinsModuleName}' in pinsModule{} with gradle, which is dependent by '${currentPinsModule.name}'")
+            throw new GradleException("can not find specified pinsModule '${dependencyModuleName}' in pinsModule{} with gradle, which is dependent by '${currentPinsModule.name}'")
         }
+        putPinsDependency(currentPinsModule, dependencyModuleName)
+    }
 
+    private void putPinsDependency(PinsModuleEntity currentPinsModule, String dependencyModuleName) {
         Set<String> dependencySet = dependencyPinsModuleMap.get(currentPinsModule.name)
         if (dependencySet == null) {
             dependencySet = new HashSet<>()
-            dependencySet.add(currentPinsModule.name)
+            dependencySet.add(dependencyModuleName)
             dependencyPinsModuleMap.put(currentPinsModule.name, dependencySet)
         } else {
-            dependencySet.add(currentPinsModule.name)
+            dependencySet.add(dependencyModuleName)
         }
-
     }
+
 
 }

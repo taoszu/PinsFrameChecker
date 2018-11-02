@@ -1,7 +1,6 @@
 package com.taoszu.codecheck.pins.extension
 
-import com.taoszu.codecheck.pins.PinsModuleEntity
-import com.taoszu.codecheck.pins.PinsModuleWareHouse
+import com.taoszu.codecheck.pins.entity.PinsModuleEntity
 import com.taoszu.codecheck.pins.tool.CommonTool
 import com.taoszu.codecheck.pins.tool.FileTool
 import org.gradle.api.GradleException
@@ -26,7 +25,7 @@ class PinsModuleExtension implements PinsModuleExtensionInterface {
     void include(String... pinsModuleName) {
         for (String moduleName: pinsModuleName) {
             if (moduleName == null || moduleName.isEmpty()) {
-                throw new GradleException("pinsModule name can not be empty")
+                throw new GradleException("pinsModule moduleName can not be empty")
             }
 
             PinsModuleEntity pinsModule = buildPinsModule(CommonTool.formatModuleName(moduleName))
