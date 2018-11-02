@@ -1,5 +1,6 @@
 apply plugin: 'groovy'
 apply plugin: 'maven'
+apply plugin: 'com.novoda.bintray-release'
 
 dependencies {
     compile gradleApi()
@@ -21,4 +22,14 @@ uploadArchives {
             repository(url: uri('../repo'))
         }
     }
+}
+
+publish {
+    userOrg = 'taoszu'
+    groupId = 'com.taoszu.codecheck'
+    artifactId = 'pinsFrame-plugin'
+    publishVersion = "1.0.0"
+    desc = 'pins framge checker'
+    website = 'https://github.com/taoszu/PinsFrameChecker'
+    autoPublish = true
 }
